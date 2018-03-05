@@ -1,7 +1,7 @@
 // import all required
 
 var mysql = require("mysql");
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3306;
 
 //connection variable
 if (process.env.JAWSDB_URL) {
