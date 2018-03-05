@@ -1,0 +1,82 @@
+<div class=container>
+    <div class="row">
+        <div class="col-md-12">
+            <img src="public/assets/img/burger_pic.png" class="img-responsive center-block" id="burger-img" alt="Responsive image">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center" id="burger-header">Eat-Da-Burger!!</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+{{!-- UNEATEN LIST --}}
+        {{!-- ue = uneaten --}}
+        <div class="col-md-5 ue-list">
+            {{#each burger}}
+{{!-- You can use the unless helper as the inverse of the if helper. Its block will be rendered if the expression returns a falsy value. --}}
+                {{#unless this.devoured}}
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="burger-disp-text panel-body">
+                                {{this.id}}. {{this.burger_name}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        {{!-- FORM --}}
+                        <form action="/{{this.id}}?_method=PUT" method="POST">
+                        <input type="hidden" name="devoured" value="true">
+                        <button type"submit" class="burger-btn btn btn-success">Devour It!</button>
+                        </form>
+                    </div>
+        </div>
+            {{!-- close out the loop --}}
+            {{/unless}}
+        {{/each}}
+    </div>
+{{!-- EATEN LIST --}}
+<div class="col-md-3 eaten-list">
+    {{#each burger}}
+        {{#if this.devoured}}
+            <div class="panel panel-default">
+                <div class="burger-disp-text panel-body" id="devoured-text">
+                    {{this.id}}. {{this.burger_name}}
+                </div>
+            </div>
+    {{/if}}
+  {{/each}}  
+</div>
+    <div class="col-md-2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+    {{!-- FORM within the DEVOURED --}}
+    <form class="create-update-form" action="/" method="POST">
+        <div class="form-group">
+            <label class"burger-disp-text control-label" for="selectedInput">Your Burger:</label>
+            <input class="burger-disp-text form-control" id="selectedInput" type="text" placeholder="Your Burger..." name="burger_name"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="burger-btn btn btn-warning center-block">Submit</button>
+        </div>
+    </form>
+    </div>
+<div class="col-md-3">
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="burger-text text-center">Enter the burger name you want to eat and click the "Submit" button.</p>
+    </div>
+</div>
+</div>
